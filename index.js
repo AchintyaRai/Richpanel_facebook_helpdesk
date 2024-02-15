@@ -1,13 +1,16 @@
 import express from "express"
 import cors from "cors"
 import mongoose from "mongoose"
+import dotenv from "dotenv"
 
+
+dotenv.config();
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded())
 app.use(cors())
 
-mongoose.connect("mongodb://localhost:27017/myLoginRegisterDB", {
+mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }, () => {
@@ -60,7 +63,7 @@ app.post("/register", (req, res)=> {
     })
     
 }) 
-
-app.listen(9002,() => {
+const PORT = process.env.PORT || 8080
+app.listen(PORT,() => {
     console.log("BE started at port 9002")
 })
