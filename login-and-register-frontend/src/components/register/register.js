@@ -2,6 +2,8 @@ import React, { useState } from "react"
 import "./register.css"
 import axios from "axios"
 import { useHistory } from "react-router-dom"
+import { baseUrl } from "../../Urls"
+
 
 const Register = () => {
 
@@ -25,7 +27,7 @@ const Register = () => {
     const register = () => {
         const { name, email, password, reEnterPassword } = user
         if( name && email && password && (password === reEnterPassword)){
-            axios.post("http://localhost:9002/register", user)
+            axios.post(`${baseUrl}/register`, user)
             .then( res => {
                 alert(res.data.message)
                 history.push("/login")
